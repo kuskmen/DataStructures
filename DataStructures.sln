@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox", "src\Sandbox\Sandbox.csproj", "{ACE2EB2F-7ECD-460E-9380-9D7F5AC636CA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{D4949FD4-EA2D-41D8-94EB-130E62379671}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{09189B1D-6697-4A2B-B900-7731451D6B82}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataStructures.UnitTests", "tests\DataStructures.UnitTests\DataStructures.UnitTests.csproj", "{22579732-F579-4365-A3D3-713DFD0ECE20}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataStructures", "src\DataStructures\DataStructures.csproj", "{61AF1CF6-EF0E-4C6A-AEDF-5D5143E20C14}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C6DF3862-11BB-4BD7-A268-E68D135503C5}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		.travis.yml = .travis.yml
+		appveyor.yml = appveyor.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{7B8C8CEB-A45F-442B-B6FE-CA92E83C69AD}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\build.environment.ps1 = scripts\build.environment.ps1
+		scripts\tasks.ps1 = scripts\tasks.ps1
+		scripts\tests.sh = scripts\tests.sh
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ACE2EB2F-7ECD-460E-9380-9D7F5AC636CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACE2EB2F-7ECD-460E-9380-9D7F5AC636CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACE2EB2F-7ECD-460E-9380-9D7F5AC636CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACE2EB2F-7ECD-460E-9380-9D7F5AC636CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22579732-F579-4365-A3D3-713DFD0ECE20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22579732-F579-4365-A3D3-713DFD0ECE20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22579732-F579-4365-A3D3-713DFD0ECE20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22579732-F579-4365-A3D3-713DFD0ECE20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61AF1CF6-EF0E-4C6A-AEDF-5D5143E20C14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61AF1CF6-EF0E-4C6A-AEDF-5D5143E20C14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61AF1CF6-EF0E-4C6A-AEDF-5D5143E20C14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61AF1CF6-EF0E-4C6A-AEDF-5D5143E20C14}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{22579732-F579-4365-A3D3-713DFD0ECE20} = {D4949FD4-EA2D-41D8-94EB-130E62379671}
+		{61AF1CF6-EF0E-4C6A-AEDF-5D5143E20C14} = {09189B1D-6697-4A2B-B900-7731451D6B82}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {62D61ACA-FB99-48C1-ADB8-35716DE96C9D}
+	EndGlobalSection
+EndGlobal

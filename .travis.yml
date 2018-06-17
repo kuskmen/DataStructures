@@ -1,0 +1,11 @@
+language: csharp
+dotnet: 2.0.0
+solution: DataStructures.sln
+install:
+    - nuget install NUnit.ConsoleRunner -OutputDirectory testutils
+    - dotnet restore DataStructures.sln
+script:
+    - msbuild /p:Configuration=Release DataStructures.sln
+    - mono ./testutils/NUnit.ConsoleRunner.*/tools/nunit3-console.exe ./tests/DataStructures.UnitTests/bin/Release/net462/*UnitTests.dll
+cache:
+    - .nuget/packages
