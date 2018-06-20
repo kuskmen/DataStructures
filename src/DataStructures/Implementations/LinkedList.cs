@@ -1,24 +1,24 @@
-﻿using DataStructures.Abstractions;
-
-namespace DataStructures.Implementations
+﻿namespace DataStructures.Implementations
 {
+    using DataStructures.Abstractions;
+
     public class LinkedList<T> : ILinkedList<T> 
     {
-        public Node<T> Head { get; }
-        public Node<T> Current { get; private set; }
+        public Node<T> Head { get; private set; }
+        public Node<T> Tail { get; private set; }
         public int Count { get; private set; }
 
         public LinkedList()
         {
             Head = new Node<T>();
-            Current = Head;
+            Tail = Head;
         }
 
         public void AddLast(T data)
         {
            var newNode = new Node<T> { Data = data };
-            Current.Next = newNode;
-            Current = newNode;
+            Tail.Next = newNode;
+            Tail = newNode;
             Count++;
         }
 
@@ -27,10 +27,9 @@ namespace DataStructures.Implementations
             var newNode = new Node<T>
             {
                 Data = data,
-                Next = Head.Next
+                Next = Head
             };
-            newNode.Next = Head.Next;
-            Head.Next = newNode.Next;
+            Head = newNode;
             Count++;
         }
     }
