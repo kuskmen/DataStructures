@@ -58,6 +58,15 @@
             Assert.AreEqual(array.Length, heap.Count);
         }
 
+        [TestCaseSource(typeof(HeapTestsHelper), nameof(IteratingMaxHeap_ShouldIterateItemsSequentiallySource))]
+        public void IteratingMaxHeap_ShouldIterateItemsSequentially(int[] array, HeapFactory heapFactory)
+        {
+            // Arrange
+            // Act
+            // Assert
+
+        }
+
         [TestCase(new[] { 3, 2, 1 })]
         public void GetMax_ShouldReturnHighestElementInTheHeapWithoutExtractingIt(int[] array)
         {
@@ -378,7 +387,16 @@
                 yield return new TestCaseData(new[] { 2, 7, 26, 25, 19, 17, 1, 90, 3, 36 }, new HeapPropertyVerifier(IsMaxHeap), new HeapFactory(InitMaxHeap)).SetName($"{nameof(HeapTests.Build_ShouldBuildCorrectHeap)} [ 2, 7, 26, 25, 19, 17, 1, 90, 3, 36 ] {nameof(InitMaxHeap)}");
                 yield return new TestCaseData(new[] { 2, 7, 26, 25, 19, 17, 1, 90, 3, 36 }, new HeapPropertyVerifier(IsMinHeap), new HeapFactory(InitMinHeap)).SetName($"{nameof(HeapTests.Build_ShouldBuildCorrectHeap)} [ 2, 7, 26, 25, 19, 17, 1, 90, 3, 36 ] {nameof(InitMinHeap)}");
             }
-        } 
+        }
+
+        public static IEnumerable<object> IteratingMaxHeap_ShouldIterateItemsSequentiallySource
+        {
+            get
+            {
+                yield return new TestCaseData(new[] { 2, 7, 26, 25, 19, 17, 1, 90, 3, 36 }, new HeapFactory(InitMaxHeap)).SetName($"{nameof(HeapTests.IteratingMaxHeap_ShouldIterateItemsSequentially)} [ 2, 7, 26, 25, 19, 17, 1, 90, 3, 36 ] {nameof(InitMaxHeap)}");
+                yield return new TestCaseData(new[] { 2, 7, 26, 25, 19, 17, 1, 90, 3, 36 }, new HeapFactory(InitMinHeap)).SetName($"{nameof(HeapTests.IteratingMaxHeap_ShouldIterateItemsSequentially)} [ 2, 7, 26, 25, 19, 17, 1, 90, 3, 36 ] {nameof(InitMinHeap)}");
+            }
+        }
 
         public static IEnumerable<object> Extract_ShouldExtractAlwaysElementWithBiggestPriorityFromHeapSource
         {
