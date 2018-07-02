@@ -62,9 +62,20 @@
         public void IteratingMaxHeap_ShouldIterateItemsSequentially(int[] array, HeapFactory heapFactory)
         {
             // Arrange
+            var heap = heapFactory(array, _intMaxComparer);
+            
             // Act
             // Assert
-
+            using (var it = heap.GetEnumerator())
+            {
+                var index = 0;
+                var heapArray = heap.ToArray();
+                while (it.MoveNext())
+                {
+                    Assert.AreEqual(heapArray[index], it.Current);
+                    index++;
+                }
+            }
         }
 
         [TestCase(new[] { 3, 2, 1 })]
