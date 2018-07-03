@@ -1,7 +1,6 @@
 ﻿namespace DataStructures.Implementations
 {
     using System;
-    using System.Runtime.CompilerServices;
     using DataStructures.Abstractions;
     using DataStructures.Extensions;
 
@@ -9,7 +8,7 @@
     ///  Represents heap data struture.
     /// </summary>
     /// <typeparam name="T">Type of the elements in the heap.</typeparam>
-    public class MaxHeap<T> : AbstractHeap<T>, IPriorityQueue<T>, IMaxHeap<T>
+    public class MaxHeap<T> : AbstractHeap<T>, IMaxHeap<T>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MaxHeap{T}"/> class.

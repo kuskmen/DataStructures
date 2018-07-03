@@ -151,6 +151,7 @@
         /// <summary>
         ///  Maintains the heap property with the help of <see cref="_criteriaValidator"/> comparison delegate.
         ///  Takes O(logn) time complexity.
+        /// </summary>
         public abstract void Heapify(T[] array, int size, int index);
 
         /// <inheritdoc />

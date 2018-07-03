@@ -4,7 +4,7 @@
     ///   Represents priority queue data structure.
     /// </summary>
     /// <typeparam name="T">Type of the parameters stored in the priority queue.</typeparam>
-    public interface IPriorityQueue<T>
+    public interface IPriorityQueue<T> 
     {
         /// <summary>
         ///  Gets the number of items in the priority queue.
