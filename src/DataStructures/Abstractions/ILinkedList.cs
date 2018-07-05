@@ -1,11 +1,17 @@
 ﻿namespace DataStructures.Abstractions
 {
-    public interface ILinkedList<in T>
+    using DataStructures.Implementations;
+
+    public interface ILinkedList<T>
     {
+        Node<T> Head { get; }
+
         int Count { get; }
 
-        void AddLast(T data);
+        bool IsEmpty { get; }
 
-        void AddStart(T data);
+        void AddBack(T data);
+
+        void AddFront(T data);
     }
 }

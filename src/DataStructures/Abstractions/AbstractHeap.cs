@@ -153,58 +153,12 @@
         /// <summary>
         ///  Maintains the heap property with the help of <see cref="_criteriaValidator"/> comparison delegate.
         ///  Takes O(logn) time complexity.
+        /// </summary>
         public abstract void Heapify(T[] array, int size, int index);
 
         /// <inheritdoc />
         /// <remarks> Takes O(logn) time complexity. </remarks>
         public abstract void Add(T element);
 
-        internal struct HeapIterator : IEnumerator<T>
-        {
-            private readonly T[] _items;
-            private int _position;
-
-            public HeapIterator(T[] items, int position = -1)
-            {
-                _items = items;
-                _position = position;
-            }
-            
-            public bool MoveNext()
-            {
-                ++_position;
-                return _position < _items.Length;
-            }
-
-            public void Reset()
-            {
-                _position = -1;
-            }
-
-            public T Current
-            {
-                get
-                {
-                    try
-                    {
-                        return _items[_position];
-                    }
-                    catch (IndexOutOfRangeException)
-                    {
-                        throw new InvalidOperationException();
-                    }
-                }
-            }
-
-            object IEnumerator.Current => Current;
-
-            public void Dispose()
-            {
-            }
-        }
-
-        public IEnumerator<T> GetEnumerator() => new HeapIterator(_items);
-
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }
