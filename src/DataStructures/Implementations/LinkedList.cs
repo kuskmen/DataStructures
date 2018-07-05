@@ -119,12 +119,21 @@
 
             if(IsEmpty) throw new InvalidOperationException();
 
-            var it = Head;
-            while (it.Next != null && index != 0)
+            var current = Head;
+            var previous = Head;
+            
+            while (current.Next != null && index != 0)
             {
-                it = it.Next;
+                previous = current;
+                current = current.Next;
                 index--;
             }
+
+            previous.Next = new Node<T>
+            {
+                Data = item,
+                Next = current
+            };
         }
     }
 }

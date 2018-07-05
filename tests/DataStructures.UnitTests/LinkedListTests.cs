@@ -96,6 +96,21 @@
         }
 
         [Test]
+        public void InsertAt_ShouldInsertItemAtGiveIndex()
+        {
+            // Arrange
+            _linkedList.AddFront(1);
+            _linkedList.AddFront(2);
+            _linkedList.AddFront(3);
+            
+            // Act
+            _linkedList.InsertAt(4, 1); 
+
+            // Assert
+            Assert.AreEqual(4, _linkedList.Head.Next.Data);
+        }
+
+        [Test]
         public void Indexer_WhenProvidedWithInvalidIndex_ShouldThrowArgumentException()
         {
             // Arrange
