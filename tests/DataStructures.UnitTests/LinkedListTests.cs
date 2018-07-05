@@ -96,6 +96,17 @@
         }
 
         [Test]
+        public void InsertAt_WhenIndexIsOutOfRange_ShouldThrowOutOfRangeException()
+        {
+            // Arrange
+            // Act
+            _linkedList.AddFront(3);
+
+            // Assert
+            Assert.Throws<IndexOutOfRangeException>(() => _linkedList.InsertAt(5, 7));
+        }
+
+        [Test]
         public void InsertAt_ShouldInsertItemAtGiveIndex()
         {
             // Arrange
@@ -108,6 +119,54 @@
 
             // Assert
             Assert.AreEqual(4, _linkedList.Head.Next.Data);
+        }
+
+        [Test]
+        public void EraseAt_WhenIndexIsOutOfRange_ShouldThrowOutOfRangeException()
+        {
+            // Arrange
+            // Act
+            // Assert
+            Assert.Throws<IndexOutOfRangeException>(() => _linkedList.EraseAt(8));
+        }
+
+        [Test]
+        public void EraseAt_ShouldEraseItemAtGivenIndex()
+        {
+            // Arrange
+            _linkedList.AddFront(1);
+            _linkedList.AddFront(2);
+            _linkedList.AddFront(3);
+
+            // Act
+            _linkedList.EraseAt(1);
+
+            // Assert
+            Assert.AreEqual(1, _linkedList.Head.Next.Data);
+        }
+
+        [Test]
+        public void Remove_ShouldReturnFalseWhenListIsEmptyOrThereIsNoSuchItem()
+        {
+            // Arrange
+            var emptyList = new LinkedList<int>();
+            _linkedList.AddFront(3);
+
+            // Act
+            // Assert
+            Assert.IsFalse(emptyList.Remove(i => i == 5));
+            Assert.IsFalse(_linkedList.Remove(i => i == 5));
+        }
+
+        [Test]
+        public void Remove_ShouldReturnTrueIfItemIsPresentInTheList()
+        {
+            // Arrange
+            _linkedList.AddFront(5);
+
+            // Act
+            // Assert
+            Assert.IsTrue(_linkedList.Remove(i => i == 5));
         }
 
         [Test]

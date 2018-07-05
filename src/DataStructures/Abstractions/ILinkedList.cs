@@ -13,5 +13,11 @@
         void AddBack(T data);
 
         void AddFront(T data);
+
+        T PopFront();
+
+        T PopBack();
+
+        void InsertAt(T item, int index);
     }
 }

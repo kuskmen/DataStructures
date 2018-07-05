@@ -117,8 +117,6 @@
         {
             if(index > Count) throw new IndexOutOfRangeException();
 
-            if(IsEmpty) throw new InvalidOperationException();
-
             var current = Head;
             var previous = Head;
             
@@ -135,5 +133,36 @@
                 Next = current
             };
         }
-    }
+
+        public void EraseAt(int index)
+        {
+            if(index > Count) throw new IndexOutOfRangeException();
+
+            var previous = Head;
+            var current = Head;
+            while (current.Next != null && index > 0)
+            {
+                previous = current;
+                current = current.Next;
+                index--;
+            }
+
+            previous.Next = current.Next;
+            current = null;
+        }
+
+        public bool Remove(Func<T, bool> predicate)
+        {
+            if (Head == null) return false;
+            if (predicate(Head.Data)) return true;
+
+            var current = Head;
+            while (current.Next != null)
+            {
+                if (predicate(current.Data)) return true;
+            }
+
+            return predicate(current.Data);
+        }
+   }
 }
