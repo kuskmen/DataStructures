@@ -6,8 +6,6 @@
     {
         Node<T> Head { get; }
 
-        Node<T> Tail { get; }
-
         int Count { get; }
 
         bool IsEmpty { get; }

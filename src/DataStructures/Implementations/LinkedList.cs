@@ -7,27 +7,47 @@
     {
         public Node<T> Head { get; private set; }
 
-        public Node<T> Tail { get; private set; }
-
         public int Count { get; private set; }
+
+        public LinkedList()
+        {
+            Head = null;
+            Count = 0;
+        }
+
+        public T Tail()
+        {
+            if (Head == null) return default;
+
+            var it = Head;
+            while (it.Next != null)
+            {
+                it = it.Next;
+            }
+
+            return it.Data;
+        }
 
         public bool IsEmpty => Count == 0;
 
         public void AddBack(T data)
         {
             var newNode = new Node<T> { Data = data };
-            if (Tail == null)
+            if (Head == null)
             {
-                Tail = newNode;
                 Head = newNode;
-                Head.Next = Tail;
-                Tail.Next = null;
             }
             else
             {
-                Tail.Next = newNode;
-                Tail = newNode;
+                var it = Head;
+                while (it.Next != null)
+                {
+                    it = it.Next;
+                }
+
+                it.Next = newNode;
             }
+
             Count++;
         }
 
@@ -38,11 +58,10 @@
                 Data = data,
                 Next = Head
             };
+
             if (Head == null)
             {
                 Head = newNode;
-                Tail = newNode;
-                Head.Next = Tail;
             }
             else
             {
@@ -69,6 +88,42 @@
                 }
 
                 return current.Data;
+            }
+        }
+
+        public T PopFront()
+        {
+            if(IsEmpty) throw new InvalidOperationException("List is empty");
+
+            var front = Head;
+            Head = Head.Next;
+            return front.Data;
+        }
+
+        public T PopBack()
+        {
+            if(IsEmpty) throw new InvalidOperationException("List is empty");
+
+            var it = Head;
+            while (it.Next != null)
+            {
+                it = it.Next;
+            }
+
+            return it.Data;
+        }
+
+        public void InsertAt(T item, int index)
+        {
+            if(index > Count) throw new IndexOutOfRangeException();
+
+            if(IsEmpty) throw new InvalidOperationException();
+
+            var it = Head;
+            while (it.Next != null && index != 0)
+            {
+                it = it.Next;
+                index--;
             }
         }
     }

@@ -27,6 +27,51 @@
         }
 
         [Test]
+        public void PopFront_WhenThereIsNoItemsInTheList_ShouldThrowOperationException()
+        {
+            // Arrange
+            // Act
+            // Assert
+            Assert.Throws<InvalidOperationException>(() => _linkedList.PopFront());
+        }
+
+        [Test]
+        public void PopFront_WhenThereAreItemsInTheList_ShouldReturnTheHeadOfTheList()
+        {
+            // Arrange
+
+            // Act
+            _linkedList.AddFront(5);
+            _linkedList.AddFront(3);
+
+            // Assert
+            Assert.AreEqual(3, _linkedList.PopFront());
+        }
+
+
+        [Test]
+        public void PopBack_WhenThereIsNoItemsInTheList_ShouldThrowOperationException()
+        {
+            // Arrange
+            // Act
+            // Assert
+            Assert.Throws<InvalidOperationException>(() => _linkedList.PopBack());
+        }
+        
+        [Test]
+        public void PopBack_WhenThereAreItemsInTheList_ShouldReturnTheBackdOfTheList()
+        {
+            // Arrange
+
+            // Act
+            _linkedList.AddFront(5);
+            _linkedList.AddFront(3);
+
+            // Assert
+            Assert.AreEqual(5, _linkedList.PopBack());
+        }
+
+        [Test]
         public void AddLast_ShouldAddItemsInTheEndOfTheList()
         {
             // Arrange
@@ -35,7 +80,7 @@
             _linkedList.AddBack(6);
 
             // Assert
-            Assert.AreEqual(6, _linkedList.Tail.Data);
+            Assert.AreEqual(6, _linkedList.Tail());
         }
 
         [Test]
@@ -136,8 +181,8 @@
             secondList.AddBack(7);
 
             // Assert
-            Assert.AreEqual(5, _linkedList.Tail.Data);
-            Assert.AreEqual(7, secondList.Tail.Data);
+            Assert.AreEqual(5, _linkedList.Tail());
+            Assert.AreEqual(7, secondList.Tail());
         }
     }
 }
