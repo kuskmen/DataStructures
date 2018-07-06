@@ -164,5 +164,23 @@
 
             return predicate(current.Data);
         }
+
+        public void Reverse()
+        {
+            if (Head == null) return;
+
+            Node<T> prev = null;
+            var current = Head;
+
+            while (current != null)
+            {
+                var next = current.Next;
+                current.Next = prev;
+                prev = current;
+                current = next;
+            }
+
+            Head = prev;
+        }
    }
 }

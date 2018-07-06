@@ -39,7 +39,6 @@
         public void PopFront_WhenThereAreItemsInTheList_ShouldReturnTheHeadOfTheList()
         {
             // Arrange
-
             // Act
             _linkedList.AddFront(5);
             _linkedList.AddFront(3);
@@ -62,7 +61,6 @@
         public void PopBack_WhenThereAreItemsInTheList_ShouldReturnTheBackdOfTheList()
         {
             // Arrange
-
             // Act
             _linkedList.AddFront(5);
             _linkedList.AddFront(3);
@@ -93,6 +91,39 @@
 
             // Assert
             Assert.AreEqual(2, _linkedList.Count);
+        }
+
+        [Test]
+        public void Reverse_ShouldReverseTheListWhenItIsNotEmpty()
+        {
+            // Arrange
+            var items = new [] { 1, 2, 3 };
+            foreach (var item in items)
+            {
+                _linkedList.AddBack(item);
+            }
+
+            // Act
+            _linkedList.Reverse();
+
+            // Assert
+            var current = _linkedList.Head;
+            var index = items.Length - 1;
+            while (current.Next != null && index >= 0)
+            {
+                Assert.AreEqual(items[index], current.Data);
+                index--;
+                current = current.Next;
+            } 
+        }
+
+        [Test]
+        public void Reverse_WhenListIsEmpty_ShouldNotThrowException()
+        {
+            // Arrange
+            // Act
+            // Assert
+            Assert.DoesNotThrow(() => _linkedList.Reverse());
         }
 
         [Test]
