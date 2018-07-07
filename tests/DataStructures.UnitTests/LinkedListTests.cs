@@ -56,7 +56,6 @@
             Assert.Throws<InvalidOperationException>(() => _linkedList.PopFromEnd(3));
         }
 
-        
         [Test]
         public void PopFromEnd_WhenIndexIsLargerThanItemsInList_ShouldThrowIndexOutOfRangeException()
         {
@@ -68,15 +67,19 @@
             Assert.Throws<IndexOutOfRangeException>(() => _linkedList.PopFromEnd(3));
         }
 
-        [Test]
-        public void PopFromEnd_ShouldPopItemThatIsIndexItemsFromBackOfTheList()
+        [TestCase(new[] { 1 }, 1)]
+        [TestCase(new[] { 1, 2, 3 }, 2)]
+        public void PopFromEnd_ShouldPopItemThatIsIndexItemsFromBackOfTheList(int[] items, int expected)
         {
             // Arrange
-            _linkedList.AddFront(1);
+            foreach (var item in items)
+            {
+                _linkedList.AddFront(item);
+            }
 
             // Act
             // Assert
-            Assert.AreEqual(1, _linkedList.PopFromEnd(1));
+            Assert.AreEqual(expected, _linkedList.PopFromEnd(1));
         }
 
         [Test]
@@ -87,7 +90,7 @@
             // Assert
             Assert.Throws<InvalidOperationException>(() => _linkedList.PopBack());
         }
-        
+
         [Test]
         public void PopBack_WhenThereAreItemsInTheList_ShouldReturnTheBackdOfTheList()
         {
@@ -128,7 +131,7 @@
         public void Reverse_ShouldReverseTheListWhenItIsNotEmpty()
         {
             // Arrange
-            var items = new [] { 1, 2, 3 };
+            var items = new[] { 1, 2, 3 };
             foreach (var item in items)
             {
                 _linkedList.AddBack(item);
@@ -145,7 +148,7 @@
                 Assert.AreEqual(items[index], current.Data);
                 index--;
                 current = current.Next;
-            } 
+            }
         }
 
         [Test]
@@ -175,9 +178,9 @@
             _linkedList.AddFront(1);
             _linkedList.AddFront(2);
             _linkedList.AddFront(3);
-            
+
             // Act
-            _linkedList.InsertAt(4, 1); 
+            _linkedList.InsertAt(4, 1);
 
             // Assert
             Assert.AreEqual(4, _linkedList.Head.Next.Data);
@@ -220,15 +223,19 @@
             Assert.IsFalse(_linkedList.Remove(i => i == 5));
         }
 
-        [Test]
-        public void Remove_ShouldReturnTrueIfItemIsPresentInTheList()
+        [TestCase(new[] { 5 }, 5)]
+        [TestCase(new[] { 1, 2, 3 }, 3)]
+        public void Remove_ShouldReturnTrueIfItemIsPresentInTheList(int[] items, int expected)
         {
             // Arrange
-            _linkedList.AddFront(5);
+            foreach (var item in items)
+            {
+                _linkedList.AddFront(item);
+            }
 
             // Act
             // Assert
-            Assert.IsTrue(_linkedList.Remove(i => i == 5));
+            Assert.IsTrue(_linkedList.Remove(i => i == expected));
         }
 
         [Test]
@@ -303,7 +310,7 @@
             Assert.AreEqual(5, _linkedList.Head.Data);
             Assert.AreEqual(2, secondList.Head.Data);
         }
-        
+
         [Test]
         public void Tail_ShouldAlwaysPointToTheBackOfTheList()
         {
