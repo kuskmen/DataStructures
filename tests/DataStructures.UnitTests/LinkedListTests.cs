@@ -47,6 +47,37 @@
             Assert.AreEqual(3, _linkedList.PopFront());
         }
 
+        [Test]
+        public void PopFromEnd_WhenListIsEmty_ShouldThrowInvalidOperationException()
+        {
+            // Arrange
+            // Act
+            // Assert
+            Assert.Throws<InvalidOperationException>(() => _linkedList.PopFromEnd(3));
+        }
+
+        
+        [Test]
+        public void PopFromEnd_WhenIndexIsLargerThanItemsInList_ShouldThrowIndexOutOfRangeException()
+        {
+            // Arrange
+            _linkedList.AddFront(2);
+
+            // Act
+            // Assert
+            Assert.Throws<IndexOutOfRangeException>(() => _linkedList.PopFromEnd(3));
+        }
+
+        [Test]
+        public void PopFromEnd_ShouldPopItemThatIsIndexItemsFromBackOfTheList()
+        {
+            // Arrange
+            _linkedList.AddFront(1);
+
+            // Act
+            // Assert
+            Assert.AreEqual(1, _linkedList.PopFromEnd(1));
+        }
 
         [Test]
         public void PopBack_WhenThereIsNoItemsInTheList_ShouldThrowOperationException()
