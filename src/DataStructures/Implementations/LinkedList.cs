@@ -182,5 +182,23 @@
 
             Head = prev;
         }
+
+        public T PopFromEnd(int index)
+        {
+            if(IsEmpty) throw new InvalidOperationException("List is empty.");
+
+            var searchingIndex = Count - index;
+            if (searchingIndex < 0) throw new IndexOutOfRangeException();
+
+            var current = Head;
+            var counter = 1;
+            while (current.Next != null && counter != searchingIndex)
+            {
+                current = current.Next;
+                counter++;
+            }
+
+            return current.Data;
+        }
    }
 }
