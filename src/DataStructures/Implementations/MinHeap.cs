@@ -4,7 +4,7 @@
     using DataStructures.Abstractions;
     using DataStructures.Extensions;
 
-    public class MinHeap<T> : AbstractHeap<T>, IPriorityQueue<T>, IMinHeap<T>
+    public sealed class MinHeap<T> : AbstractHeap<T>, IMinHeap<T>
     {
         public MinHeap(T[] data, Comparison<T> criteriaValidator) : base(data, criteriaValidator)
         {

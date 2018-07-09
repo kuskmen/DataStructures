@@ -3,7 +3,7 @@
     using System;
     using DataStructures.Abstractions;
 
-    public class LinkedList<T> : ILinkedList<T>
+    public sealed class LinkedList<T> : ILinkedList<T>
     {
         public Node<T> Head { get; private set; }
 
@@ -17,7 +17,7 @@
 
         public T Tail()
         {
-            if (Head == null) return default;
+            if (IsEmpty) return default;
 
             var it = Head;
             while (it.Next != null)
@@ -33,7 +33,7 @@
         public void AddBack(T data)
         {
             var newNode = new Node<T> { Data = data };
-            if (Head == null)
+            if (IsEmpty)
             {
                 Head = newNode;
             }
@@ -59,7 +59,7 @@
                 Next = Head
             };
 
-            if (Head == null)
+            if (IsEmpty)
             {
                 Head = newNode;
             }
@@ -153,7 +153,7 @@
 
         public bool Remove(Func<T, bool> predicate)
         {
-            if (Head == null) return false;
+            if (IsEmpty) return false;
             if (predicate(Head.Data)) return true;
 
             var current = Head;
@@ -167,7 +167,7 @@
 
         public void Reverse()
         {
-            if (Head == null) return;
+            if (IsEmpty) return;
 
             Node<T> prev = null;
             var current = Head;
