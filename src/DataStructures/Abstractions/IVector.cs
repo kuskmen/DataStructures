@@ -1,4 +1,4 @@
-﻿namespace DataStructures.Abstractions
+﻿﻿namespace DataStructures.Abstractions
 {
     using System;
 
@@ -23,6 +23,5 @@
         void Remove(Predicate<T> predicate);
 
         int Find(Predicate<T> predicate);
-
     }
 }

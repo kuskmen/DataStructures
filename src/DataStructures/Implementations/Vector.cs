@@ -1,4 +1,4 @@
-﻿namespace DataStructures.Implementations
+namespace DataStructures.Implementations
 {
     using System;
     using DataStructures.Abstractions;
@@ -81,6 +81,11 @@
         }
 
         public int Find(Predicate<T> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(Func<T, bool> predicate)
         {
             throw new NotImplementedException();
         }
