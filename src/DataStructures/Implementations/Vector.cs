@@ -70,24 +70,32 @@ namespace DataStructures.Implementations
             if(index > Count || index < 0) throw new IndexOutOfRangeException();
 
             Array.ConstrainedCopy(_data, index + 1, _data, index, Count - index);
+            Count--;
         }
 
         public void Remove(Predicate<T> predicate)
         {
-            for (var i = 0; i < _data.Length; i++)
+            var i = 0;
+            while (i < Count)
             {
-                if(predicate(_data[i])) Delete(i); 
+                if (predicate(_data[i]))
+                {
+                    Delete(i);
+                    continue;
+                }
+
+                i++;
             }
         }
 
         public int Find(Predicate<T> predicate)
         {
-            throw new NotImplementedException();
-        }
+            for (var i = 0; i < Count; i++)
+            {
+                if(predicate(_data[i])) return i;
+            }
 
-        public void Remove(Func<T, bool> predicate)
-        {
-            throw new NotImplementedException();
+            return -1;
         }
     }
 }
