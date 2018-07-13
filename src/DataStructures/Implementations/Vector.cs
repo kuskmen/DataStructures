@@ -1,12 +1,12 @@
-﻿using System;
-
 namespace DataStructures.Implementations
 {
+    using System;
     using DataStructures.Abstractions;
 
     public sealed class Vector<T> : IVector<T>
     {
         private T[] _data;
+        private const int DefaultCapacity = 16;
 
         public int Count { get; private set; }
 
@@ -14,12 +14,7 @@ namespace DataStructures.Implementations
 
         public bool IsEmpty => Count == 0;
 
-        public Vector()
-        {
-            _data = new T[16];
-            Count = 0;
-            Capacity = 16;
-        }
+        public Vector() : this(DefaultCapacity) { }
 
         public Vector(int capacity)
         {
@@ -45,34 +40,62 @@ namespace DataStructures.Implementations
                 Array.Resize(ref _data, Capacity);
             }
 
-            Count += 1;
             _data[Count] = item;
+            Count += 1;
         }
 
         public void Insert(T item, int index)
         {
             if(index > Count || index < 0) throw new IndexOutOfRangeException();
-             
+            if (Count == Capacity)
+            {
+                Capacity *= 2;
+                Array.Resize(ref _data, Capacity);
+            }
+
+            Array.ConstrainedCopy(_data, index, _data, index + 1, Count - index);
+            _data[index] = item;
         }
 
         public T Pop()
         {
-            throw new NotImplementedException();
+            Count -= 1;
+            var last = _data[Count];
+            _data[Count] = default;
+            return last;
         }
 
         public void Delete(int index)
         {
-            throw new NotImplementedException();
+            if(index > Count || index < 0) throw new IndexOutOfRangeException();
+
+            Array.ConstrainedCopy(_data, index + 1, _data, index, Count - index);
+            Count--;
         }
 
-        public void Remove(Func<T, bool> predicate)
+        public void Remove(Predicate<T> predicate)
         {
-            throw new NotImplementedException();
+            var i = 0;
+            while (i < Count)
+            {
+                if (predicate(_data[i]))
+                {
+                    Delete(i);
+                    continue;
+                }
+
+                i++;
+            }
         }
 
-        public int Find(Func<T, bool> predicate)
+        public int Find(Predicate<T> predicate)
         {
-            throw new NotImplementedException();
+            for (var i = 0; i < Count; i++)
+            {
+                if(predicate(_data[i])) return i;
+            }
+
+            return -1;
         }
     }
 }

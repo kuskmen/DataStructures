@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace DataStructures.Abstractions
+﻿﻿namespace DataStructures.Abstractions
 {
+    using System;
+
     public interface IVector<T>
     {
         int Count { get; }
@@ -20,9 +20,8 @@ namespace DataStructures.Abstractions
 
         void Delete(int index);
 
-        void Remove(Func<T, bool> predicate);
+        void Remove(Predicate<T> predicate);
 
-        int Find(Func<T, bool> predicate);
-
+        int Find(Predicate<T> predicate);
     }
 }
