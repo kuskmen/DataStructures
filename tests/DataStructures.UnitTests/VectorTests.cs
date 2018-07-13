@@ -111,6 +111,21 @@ namespace DataStructures.UnitTests
         }
 
         [Test]
+        public void Insert_WhenIndexIsValidAndThereIsNoCapacity_ShouldFirstResizeTheVectorThenInsertIt()
+        {
+            // Arrange
+            var smallSizeVector = new Vector<int>(1);
+            smallSizeVector.Push(1);
+
+            // Act
+            smallSizeVector.Insert(2, 1);
+
+            // Assert
+            Assert.AreEqual(2, smallSizeVector.Capacity);
+            Assert.AreEqual(2, smallSizeVector[1]);
+        }
+
+        [Test]
         public void Pop_ShouldReturnLastElementFromTheVectorInEmptyVectorThisIsDefaultValue()
         {
             // Arrange
@@ -137,6 +152,15 @@ namespace DataStructures.UnitTests
             Assert.AreEqual(2, _vector.Count);
             Assert.AreEqual(7, _vector[0]);
             Assert.AreEqual(2, _vector[1]);
+        }
+
+        [Test]
+        public void Delete_WhenIndexIsInvalid_ShouldThrowIndexOutOfRangeException()
+        {
+            // Arrange
+            // Act
+            // Assert
+            Assert.Throws<IndexOutOfRangeException>(() => _vector.Delete(-5));
         }
 
         [Test]
