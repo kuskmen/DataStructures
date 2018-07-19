@@ -1,5 +1,6 @@
 ﻿namespace DataStructures.Implementations
 {
+    using System;
     using DataStructures.Abstractions;
 
     public class Queue<T> : IQueue<T>
@@ -24,30 +25,35 @@
     public class ArrayQueue<T> : IQueue<T>
     {
         private readonly T[] _items;
-        private int _capacity;
-        private const int DefaultCapacity = 16;
+        private int _nextFreeIndex;
+        private const int DefaultSize = 16;
 
-        public ArrayQueue() : this(DefaultCapacity)
+        public ArrayQueue() : this(DefaultSize)
         {
         }
 
-        public ArrayQueue(int capacity)
+        public ArrayQueue(int length)
         {
-            _items = new T[capacity];
-            _capacity = capacity;
+            _items = new T[length];
+            _nextFreeIndex = length - 1;
         }
 
-        public bool IsEmpty => _items.Length == 0;
-        public bool IsFull => _items.Length == _capacity - 1;
+        public bool IsEmpty => _nextFreeIndex == _items.Length - 1;
+        public bool IsFull => _nextFreeIndex == -1;
 
         public void Enqueue(T item)
         {
-            _items[_capacity] = item;
+            if(_nextFreeIndex == -1) throw new InvalidOperationException("Queue is full.");
+            _items[_nextFreeIndex] = item;
+            _nextFreeIndex--;
         }
 
         public T Dequeue()
         {
-            throw new System.NotImplementedException();
+            ++_nextFreeIndex;
+            var result = _items[_nextFreeIndex];
+            _items[_nextFreeIndex] = default;
+            return result;
         }
     }
 }
