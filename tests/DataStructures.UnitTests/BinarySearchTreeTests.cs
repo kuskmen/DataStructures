@@ -22,17 +22,22 @@
             // Arrange
             // Act
             _binarySearchTree.Insert(5);
-            _binarySearchTree.Insert(4);
-            _binarySearchTree.Insert(2);
-            _binarySearchTree.Insert(3);
-            _binarySearchTree.Insert(1);
-            _binarySearchTree.Insert(-1);
-            _binarySearchTree.Insert(6);
-            _binarySearchTree.Insert(8);
-            _binarySearchTree.Insert(7);
 
             // Assert
-            Assert.That(_binarySearchTree.Count, Is.EqualTo(1));
+            Assert.That(_binarySearchTree.Height, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Height_ShouldEqualToDepthOfTheTree()
+        {
+            // Arrange
+            // Act
+            _binarySearchTree.Insert(5);
+            _binarySearchTree.Insert(4);
+            _binarySearchTree.Insert(6);
+
+            // Assert
+            Assert.That(_binarySearchTree.Height, Is.EqualTo(2));
         }
     }
 }
