@@ -19,9 +19,27 @@
 
         public int Height => _height;
 
-        public T Min => throw new System.NotImplementedException();
+        public T Min
+        {
+            get
+            {
+                var node = _root;
+                while (node.Left != null) node = node.Left;
 
-        public T Max => throw new System.NotImplementedException();
+                return node.Data;
+            }
+        }
+
+        public T Max
+        {
+            get
+            {
+                var node = _root;
+                while (node.Right != null) node = node.Right;
+
+                return node.Data;
+            }
+        } 
 
         public T Successor => throw new System.NotImplementedException();
 
@@ -32,7 +50,16 @@
 
         public bool Find(T item)
         {
-            throw new System.NotImplementedException();
+            var node = _root;
+            while (node != null)
+            {
+                var comparison = _comparison.Invoke(node.Data, item);
+                if (comparison == 0) return true;
+
+                node = comparison < 0 ? node.Right : node.Left;
+            }
+
+            return false;
         }
 
         public void Insert(T item)
@@ -50,11 +77,13 @@
             while (node != null)
             {
                 depth++;
-                if (_comparison.Invoke(node.Data, item) > 0 && node.Left != null) node = node.Left;
-                else if (_comparison.Invoke(node.Data, item) <= 0 && node.Right != null) node = node.Right;
+                var comparison = _comparison.Invoke(node.Data, item);
+
+                if (comparison > 0 && node.Left != null) node = node.Left;
+                else if (comparison <= 0 && node.Right != null) node = node.Right;
                 else
                 {
-                    if (_comparison.Invoke(node.Data, item) > 0)
+                    if (comparison > 0)
                     {
                         node.Left = new TreeNode<T> { Data = item };
                         _count++;
