@@ -19,46 +19,33 @@
 
         public int Height => _height;
 
-        public T Min
-        {
-            get
-            {
-                var node = _root;
-                while (node.Left != null) node = node.Left;
+        public T Min => FindMin(_root).Data;
 
-                return node.Data;
-            }
-        }
-
-        public T Max
-        {
-            get
-            {
-                var node = _root;
-                while (node.Right != null) node = node.Right;
-
-                return node.Data;
-            }
-        } 
-
-        public T Successor => throw new System.NotImplementedException();
+        public T Max => FindMax(_root).Data;
+        
+        public T Successor(T item) => Find(item, out var node) ? node.Successor.Data : default;
 
         public void Delete(T item)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool Find(T item)
+        public bool Find(T item, out TreeNode<T> searchedNode)
         {
             var node = _root;
             while (node != null)
             {
                 var comparison = _comparison.Invoke(node.Data, item);
-                if (comparison == 0) return true;
+                if (comparison == 0)
+                {
+                    searchedNode = node;
+                    return true;
+                }
 
                 node = comparison < 0 ? node.Right : node.Left;
             }
 
+            searchedNode = null;
             return false;
         }
 
@@ -66,7 +53,7 @@
         {
             if (_root == null)
             {
-                _root = new TreeNode<T> { Data = item };
+                _root = new TreeNode<T> { Data = item, Parent = null };
                 _height++;
                 _count++;
                 return;
@@ -85,14 +72,14 @@
                 {
                     if (comparison > 0)
                     {
-                        node.Left = new TreeNode<T> { Data = item };
+                        node.Left = new TreeNode<T> { Data = item, Parent = node };
                         _count++;
-                        if(depth > _height) _height = depth;
+                        if (depth > _height) _height = depth;
                         return;
                     }
                     else
                     {
-                        node.Right = new TreeNode<T> {Data = item};
+                        node.Right = new TreeNode<T> { Data = item, Parent = node };
                         _count++;
                         if (depth > _height) _height = depth;
                         return;
@@ -101,5 +88,21 @@
             }
 
         }
+
+        private static TreeNode<T> FindMin(TreeNode<T> tree)
+        {
+            var node = tree;
+            while (node.Left != null) node = node.Left;
+
+            return node;
+        }
+
+        private static TreeNode<T> FindMax(TreeNode<T> tree)
+        {
+            var node = tree;
+            while (node.Right != null) node = node.Right;
+
+            return node;
+        } 
     }
 }

@@ -88,7 +88,8 @@
 
             // Act
             // Assert
-            Assert.That(_binarySearchTree.Find(4), Is.True);
+            Assert.That(_binarySearchTree.Find(4, out var searchedNode), Is.True);
+            Assert.That(searchedNode.Data, Is.EqualTo(4));
         }
 
 
@@ -102,7 +103,21 @@
 
             // Act
             // Assert
-            Assert.That(_binarySearchTree.Find(2), Is.False);
+            Assert.That(_binarySearchTree.Find(2, out _), Is.False);
+        }
+
+        [Test]
+        public void Successor_ShouldReturnNextGreaterElementInTheTree_WhenThereIsSuchOtherwiseReturnDefault()
+        {
+            // Arrange
+            _binarySearchTree.Insert(5);
+            _binarySearchTree.Insert(3);
+            _binarySearchTree.Insert(4);
+
+            // Act
+            // Assert
+            Assert.That(_binarySearchTree.Successor(4), Is.EqualTo(5));
+            Assert.That(_binarySearchTree.Successor(7), Is.EqualTo(default(int)));
         }
     }
 }
