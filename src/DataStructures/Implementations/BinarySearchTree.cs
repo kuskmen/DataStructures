@@ -17,17 +17,63 @@
 
         public int Count => _count;
 
+        // TODO: Delete breaks this. Re-search
         public int Height => _height;
 
         public T Min => FindMin(_root).Data;
 
         public T Max => FindMax(_root).Data;
-        
-        public T Successor(T item) => Find(item, out var node) ? node.Successor.Data : default;
+
+        public T Successor(T item)
+        {
+            if (!Find(item, out var node)) return default;
+
+            var comparison = _comparison.Invoke(node.Parent.Data, node.Data);
+
+            if (node.Right == null && comparison >= 0) return node.Parent.Data;
+            if (node.Right == null && comparison < 0)
+            {
+                while (node != _root && _comparison.Invoke(node.Parent.Data, node.Data) < 0)
+                {
+                    node = node.Parent;
+                }
+                return node == _root ? default : node.Parent.Data;
+            }
+
+            return node.Right != null ? FindMin(node.Right).Data : default;
+        }
 
         public void Delete(T item)
         {
-            throw new System.NotImplementedException();
+            if (!Find(item, out var node)) return;
+
+            // its a leaf
+            if (node.Right == null && node.Left == null)
+            {
+                if (_comparison.Invoke(node.Parent.Data, node.Data) > 0) node.Parent.Left = null;
+                else node.Parent.Right = null;
+            }
+            // node has both left and right child subtrees
+            else if (node?.Right != null && node.Left != null)
+            {
+                node.Data = FindMin(node.Right).Data;
+            }
+            // node has only right child subtree
+            else if (node.Right != null)
+            {
+                node.Right.Parent = node.Parent;
+
+                if (_comparison.Invoke(node.Parent.Data, node.Data) > 0) node.Parent.Left = node.Right;
+                else node.Parent.Right = node.Right;
+            }
+            // node has only left child subtree
+            else if (node.Left != null)
+            {
+                node.Left.Parent = node.Parent;
+
+                if (_comparison.Invoke(node.Parent.Data, node.Data) > 0) node.Parent.Left = node.Left;
+                else node.Parent.Right = node.Left;
+            }
         }
 
         public bool Find(T item, out TreeNode<T> searchedNode)
@@ -103,6 +149,6 @@
             while (node.Right != null) node = node.Right;
 
             return node;
-        } 
+        }
     }
 }

@@ -15,22 +15,6 @@
 
         public TreeNode<T> Parent { get; set; }
 
-        public TreeNode<T> Successor
-        {
-            get
-            {
-                if (Right == null) return Parent.Parent;
-
-                var node = Right;
-                while (Right.Left != null)
-                {
-                    node = Right.Left;
-                }
-
-                return node;
-            }
-        }
-
         public T Data { get; set; }
     }
 }
