@@ -7,7 +7,6 @@
     {
         private TreeNode<T> _root;
         private int _count = 0;
-        private int _height = 0;
         private readonly Comparison<T> _comparison;
 
         public BinarySearchTree(Comparison<T> comparison)
@@ -17,8 +16,7 @@
 
         public int Count => _count;
 
-        // TODO: Delete breaks this. Re-search
-        public int Height => _height;
+        public int Height => FindHeight(_root);
 
         public T Min => FindMin(_root).Data;
 
@@ -100,16 +98,13 @@
             if (_root == null)
             {
                 _root = new TreeNode<T> { Data = item, Parent = null };
-                _height++;
                 _count++;
                 return;
             }
 
             var node = _root;
-            var depth = 1;
             while (node != null)
             {
-                depth++;
                 var comparison = _comparison.Invoke(node.Data, item);
 
                 if (comparison > 0 && node.Left != null) node = node.Left;
@@ -120,16 +115,14 @@
                     {
                         node.Left = new TreeNode<T> { Data = item, Parent = node };
                         _count++;
-                        if (depth > _height) _height = depth;
-                        return;
                     }
                     else
                     {
                         node.Right = new TreeNode<T> { Data = item, Parent = node };
                         _count++;
-                        if (depth > _height) _height = depth;
-                        return;
                     }
+
+                    return;
                 }
             }
 
@@ -149,6 +142,28 @@
             while (node.Right != null) node = node.Right;
 
             return node;
+        }
+
+        private static int FindHeight(TreeNode<T> tree)
+        {
+            // is leaf
+            if (tree.Left == null && tree.Right == null) return 1;
+
+            // have left and right subtree
+            if (tree.Left != null && tree.Right != null)
+            {
+                var leftHeight = FindHeight(tree.Left);
+                var rightHeight = FindHeight(tree.Right);
+                return leftHeight > rightHeight ? leftHeight + 1 : rightHeight + 1;
+            }
+
+            // have only left subtree
+            if (tree.Left != null) return 1 + FindHeight(tree.Left);
+
+            // have only right subtree
+            if (tree.Right != null) return 1 + FindHeight(tree.Right);
+
+            return 0;
         }
     }
 }
