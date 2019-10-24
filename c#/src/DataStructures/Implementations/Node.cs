@@ -6,4 +6,15 @@
 
         public T Data { get; set; }
     }
+
+    public sealed class TreeNode<T>
+    {
+        public TreeNode<T> Left { get; set; }
+
+        public TreeNode<T> Right { get; set; }
+
+        public TreeNode<T> Parent { get; set; }
+
+        public T Data { get; set; }
+    }
 }
