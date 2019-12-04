@@ -157,6 +157,7 @@
   <ItemGroup>
     <ClInclude Include="CircularBuffer.hpp" />
     <ClInclude Include="Graph.h" />
+    <ClInclude Include="HashTable.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,19 +1,21 @@
 #include <iostream>
 
 #include "CircularBuffer.hpp"
+#include "HashTable.hpp"
+
+struct Node {
+
+};
 
 int main()
 {
-	auto* buffer = new CircularBuffer<int32_t>();
-	
-	for (size_t i = 0; i <= 1022; i++)
-		buffer->Write(i);
+	auto* stringHashTable = new HashTable<std::string>(3);
+	auto* nodeHashTable = new HashTable<Node>(3);
 
-	std::cout << buffer->GetCount() << std::endl;
-	std::cout << buffer->Peek() << std::endl;
+	stringHashTable->Insert("alabala");
+	stringHashTable->Insert("alabalb");
+	stringHashTable->Insert("alabalc");
+	stringHashTable->Remove("alabalb");
 
-	while (!buffer->IsEmpty())
-		std::cout << buffer->Read() << ", ";
-
-	delete buffer;
+	delete stringHashTable;
 }

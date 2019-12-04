@@ -23,10 +23,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Graph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="CircularBuffer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graph.h">
+    <ClInclude Include="HashTable.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
