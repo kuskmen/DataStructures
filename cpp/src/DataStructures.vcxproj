@@ -156,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CircularBuffer.hpp" />
+    <ClInclude Include="DoublyLinkedList.hpp" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="HashTable.hpp" />
   </ItemGroup>

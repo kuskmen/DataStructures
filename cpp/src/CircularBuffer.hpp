@@ -23,7 +23,7 @@ public:
 	Type Peek();
 	const int GetCount();
 	const bool IsEmpty();
-	void Write(const Type);
+	void Add(const Type);
 };
 
 template<typename Type, unsigned int Length>
@@ -42,7 +42,7 @@ CircularBuffer<Type, Length>::~CircularBuffer()
 }
 
 template <typename Type, unsigned int Length>
-void CircularBuffer<Type, Length>::Write(const Type element)
+void CircularBuffer<Type, Length>::Add(const Type element)
 {
 	_elements[_writeIndex] = element;
 	_writeIndex = (_writeIndex + 1) % Length;
