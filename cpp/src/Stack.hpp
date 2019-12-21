@@ -4,64 +4,77 @@
 template <typename Type>
 class Stack
 {
+private:
+    Type* _elements;
+    int _current_index;
+    const int MAX_SIZE;
+
 public:
     Stack();
     Stack(size_t);
-    Stack(const Stack<Type>&);
     ~Stack();
 
+    inline const int GetCount();
+    inline const bool IsEmpty();
     inline void Push(const Type&);
     inline Type Pop();
     inline const Type& Peek(int) const;
-
-protected:
-    Type* data;
-    int current;
-    const int MAX_SIZE;        
 };
 
 template<typename Type>
-inline Stack<Type>::Stack() : this(MEMORY_PAGE_SIZE / size(Type))
+inline Stack<Type>::Stack() : Stack(MEMORY_PAGE_SIZE / sizeof(Type))
 {
 }
 
 template<typename Type>
 inline Stack<Type>::Stack(size_t size) : MAX_SIZE(size)
 {
-    current = 0;
-}
-
-template<typename Type>
-inline Stack<Type>::Stack(const Stack<Type>& other)
-{
+    _elements = new Type[MAX_SIZE];
+    _current_index = 0;
 }
 
 template<typename Type>
 inline Stack<Type>::~Stack()
 {
-    delete[] data;
+    delete[] _elements;
 }
 
 template<typename Type>
 inline void Stack<Type>::Push(const Type& item)
 {
-    std::assert(current < MAX_SIZE);
+    assert(_current_index < MAX_SIZE);
 
-    data[current++] = item;
+    _elements[_current_index++] = item;
 }
 
 template<typename Type>
 inline Type Stack<Type>::Pop()
 {
-    std::assert(current > 0);
+    assert(_current_index > 0);
 
-    return data[--current];
+    return _elements[--_current_index];
 }
 
 template<typename Type>
 inline const Type& Stack<Type>::Peek(int depth) const
 {
-    std::assert(depth < current);
+    assert(depth < _current_index);
 
-    return data[current - (depth + 1)];
+    return _elements[_current_index - (depth + 1)];
+}
+
+template<typename Type>
+inline const bool Stack<Type>::IsEmpty()
+{
+    assert(_current_index >= 0);
+
+    return _current_index == 0;
+}
+
+template<typename Type>
+inline const int Stack<Type>::GetCount()
+{
+    assert(_current_index >= 0);
+
+    return _current_index;
 }
