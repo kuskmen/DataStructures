@@ -1,11 +1,8 @@
 #pragma once
 
-// TODO: Take this from GetNativeSysInfo(LPSYSTEM_INFO) for windows or getpagesize(void) for linux
+#include "utilities.h"
 
-// 4KB default page size
-#define _MEMORY_PAGE_SIZE 4096
-
-template <typename Type, unsigned int Length = _MEMORY_PAGE_SIZE / sizeof(Type)>
+template <typename Type, unsigned int Length = MEMORY_PAGE_SIZE / sizeof(Type)>
 class CircularBuffer
 {
 private:
@@ -29,7 +26,7 @@ public:
 template<typename Type, unsigned int Length>
 CircularBuffer<Type, Length>::CircularBuffer()
 {
-	_elements = (Type*) malloc(_MEMORY_PAGE_SIZE);
+	_elements = (Type*) malloc(MEMORY_PAGE_SIZE);
 
 	if (_elements == nullptr) 
 		exit(1);
