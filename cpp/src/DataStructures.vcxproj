@@ -159,6 +159,7 @@
     <ClInclude Include="DoublyLinkedList.hpp" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="HashTable.hpp" />
+    <ClInclude Include="Heap.hpp" />
     <ClInclude Include="Stack.hpp" />
     <ClInclude Include="utilities.h" />
   </ItemGroup>

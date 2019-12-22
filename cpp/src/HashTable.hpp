@@ -10,7 +10,7 @@ class HashTable
 private:
 	std::vector<std::list<Type>> _elements;
 
-	int Prehash(Type);
+	int Prehash(Type) const;
 
 public:
 	explicit HashTable(size_t);
@@ -20,12 +20,12 @@ public:
 };
 
 template<typename Type>
-int HashTable<Type>::Prehash(Type)
+int HashTable<Type>::Prehash(Type) const
 {
 	static_assert(sizeof(Type) == 0, "Only specializations of Prehash can be used.");
 }
 
-int HashTable<std::string>::Prehash(std::string element)
+int HashTable<std::string>::Prehash(std::string element) const
 {
 	std::hash<std::string> _hash{};
 	return _hash(element) % _elements.size();

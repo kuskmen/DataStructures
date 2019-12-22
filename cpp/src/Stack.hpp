@@ -14,8 +14,8 @@ public:
     explicit Stack(size_t);
     ~Stack();
 
-    inline const int GetCount();
-    inline const bool IsEmpty();
+    inline const int GetCount() const;
+    inline const bool IsEmpty() const;
     inline void Push(const Type&);
     inline Type Pop();
     inline const Type& Peek(int) const;
@@ -67,7 +67,7 @@ inline const Type& Stack<Type>::Peek(int depth) const
 }
 
 template<typename Type>
-inline const bool Stack<Type>::IsEmpty()
+inline const bool Stack<Type>::IsEmpty() const
 {
     assert(_current_index >= 0);
 
@@ -75,7 +75,7 @@ inline const bool Stack<Type>::IsEmpty()
 }
 
 template<typename Type>
-inline const int Stack<Type>::GetCount()
+inline const int Stack<Type>::GetCount() const
 {
     assert(_current_index >= 0);
 

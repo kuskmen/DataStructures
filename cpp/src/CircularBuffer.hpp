@@ -7,22 +7,24 @@ class CircularBuffer
 {
 private:
 	Type* _elements;
-	int _writeIndex = 0;
-	int _readIndex = 0;
-	bool _is_full = false;
+	int _writeIndex;
+	int _readIndex;
+	bool _is_full;
 	const int SIZE;
 
 public:
 
 	explicit CircularBuffer();
-	explicit CircularBuffer(int);
+	explicit CircularBuffer(size_t);
 	~CircularBuffer();
 
-	inline const Type Read();
-	inline Type Peek();
-	inline const int GetCount();
-	inline const bool IsEmpty();
-	inline void Add(const Type);
+	void Add(const Type);
+	
+	Type Read();
+	inline Type Peek() const;
+	
+	inline int GetCount() const;
+	inline bool IsEmpty() const;
 };
 
 template<typename Type>
@@ -32,8 +34,8 @@ inline CircularBuffer<Type>::CircularBuffer()
 }
 
 template<typename Type>
-inline CircularBuffer<Type>::CircularBuffer(int size)
-	: SIZE(size)
+inline CircularBuffer<Type>::CircularBuffer(size_t size)
+	: SIZE(size), _writeIndex(0), _readIndex(0), _is_full(false)
 {
 	assert(size >= 0);
 
@@ -47,7 +49,7 @@ inline CircularBuffer<Type>::~CircularBuffer()
 }
 
 template <typename Type>
-inline void CircularBuffer<Type>::Add(const Type element)
+void CircularBuffer<Type>::Add(const Type element)
 {
 	assert(_writeIndex >= 0 && _writeIndex <= SIZE);
 
@@ -60,7 +62,7 @@ inline void CircularBuffer<Type>::Add(const Type element)
 }
 
 template <typename Type>
-inline const Type CircularBuffer<Type>::Read()
+Type CircularBuffer<Type>::Read()
 {
 	assert(_readIndex >= 0 && _readIndex <= SIZE);
 
@@ -74,7 +76,7 @@ inline const Type CircularBuffer<Type>::Read()
 }
 
 template<typename Type>
-inline Type CircularBuffer<Type>::Peek()
+inline Type CircularBuffer<Type>::Peek() const
 {
 	if(_writeIndex > 0)
 		return _elements[_writeIndex - 1 % SIZE];
@@ -82,7 +84,7 @@ inline Type CircularBuffer<Type>::Peek()
 }
 
 template<typename Type>
-inline const int CircularBuffer<Type>::GetCount()
+inline int CircularBuffer<Type>::GetCount() const
 {
 	if (_writeIndex > _readIndex)
 		return _writeIndex - _readIndex;
@@ -91,7 +93,7 @@ inline const int CircularBuffer<Type>::GetCount()
 }
 
 template <typename Type>
-inline const bool CircularBuffer<Type>::IsEmpty()
+inline bool CircularBuffer<Type>::IsEmpty() const
 {
 	return _writeIndex == _readIndex && !_is_full;
 }
