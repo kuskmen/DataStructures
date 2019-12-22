@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "..\..\src\Stack.hpp"
+#include "../../src/Stack.hpp"
 
 namespace StackTests 
 {

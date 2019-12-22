@@ -2,7 +2,6 @@
 
 #include <vector>
 #include <list>
-#include <bitset>
 #include <algorithm>
 
 template <typename Type>
@@ -35,11 +34,10 @@ int HashTable<std::string>::Prehash(std::string element)
 template<typename Type>
 HashTable<Type>::HashTable(size_t length)
 {
+	assert(length >= 0);
+
 	for (int i = 0; i < length; ++i)
-	{
-		std::list<Type> list;
-		_elements.push_back(list);
-	}
+		_elements.push_back(std::list<Type>{});
 }
 
 template<typename Type>
@@ -55,5 +53,9 @@ void HashTable<Type>::Remove(Type element)
 {
 	int hash = Prehash(element);
 
-	_elements[hash].erase(std::remove(_elements[hash].begin(), _elements[hash].end(), element), _elements[hash].end());
+	_elements[hash].erase(
+		std::remove(_elements[hash].begin(), 
+					_elements[hash].end(), 
+					element), 
+		_elements[hash].end());
 }

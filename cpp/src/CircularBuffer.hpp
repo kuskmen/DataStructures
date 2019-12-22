@@ -2,7 +2,7 @@
 
 #include "utilities.h"
 
-template <typename Type, unsigned int Length = MEMORY_PAGE_SIZE / sizeof(Type)>
+template <typename Type>
 class CircularBuffer
 {
 private:
@@ -10,10 +10,12 @@ private:
 	int _writeIndex = 0;
 	int _readIndex = 0;
 	bool _is_full = false;
+	const int SIZE;
 
 public:
 
 	explicit CircularBuffer();
+	explicit CircularBuffer(int);
 	~CircularBuffer();
 
 	inline const Type Read();
@@ -23,58 +25,73 @@ public:
 	inline void Add(const Type);
 };
 
-template<typename Type, unsigned int Length>
-inline CircularBuffer<Type, Length>::CircularBuffer()
+template<typename Type>
+inline CircularBuffer<Type>::CircularBuffer() 
+	: CircularBuffer(MEMORY_PAGE_SIZE / sizeof(Type))
 {
-	_elements = (Type*) malloc(MEMORY_PAGE_SIZE);
-
-	if (_elements == nullptr) 
-		exit(1);
 }
 
-template<typename Type, unsigned int Length>
-inline CircularBuffer<Type, Length>::~CircularBuffer()
+template<typename Type>
+inline CircularBuffer<Type>::CircularBuffer(int size)
+	: SIZE(size)
 {
-	free(_elements);
+	assert(size >= 0);
+
+	_elements = new Type[SIZE];
 }
 
-template <typename Type, unsigned int Length>
-inline void CircularBuffer<Type, Length>::Add(const Type element)
+template<typename Type>
+inline CircularBuffer<Type>::~CircularBuffer()
 {
+	delete[] _elements;
+}
+
+template <typename Type>
+inline void CircularBuffer<Type>::Add(const Type element)
+{
+	assert(_writeIndex >= 0 && _writeIndex <= SIZE);
+
 	_elements[_writeIndex] = element;
-	_writeIndex = (_writeIndex + 1) % Length;
+	_writeIndex = (_writeIndex + 1) % SIZE;
+
+	assert(_writeIndex >= 0 && _writeIndex <= SIZE);
 
 	_is_full = _writeIndex == 0 && _readIndex == 0;
 }
 
-template <typename Type, unsigned int Length>
-inline const Type CircularBuffer<Type, Length>::Read()
+template <typename Type>
+inline const Type CircularBuffer<Type>::Read()
 {
+	assert(_readIndex >= 0 && _readIndex <= SIZE);
+
 	Type ret = _elements[_readIndex];
-	_readIndex = (_readIndex + 1) % Length;
-	_is_full = false;
+	_readIndex = (_readIndex + 1) % SIZE;
+	
+	assert(_readIndex >= 0 && _readIndex <= SIZE);
+
+	_is_full = _writeIndex != 0 || _readIndex != 0;
 	return ret;
 }
 
-template<typename Type, unsigned int Length>
-inline Type CircularBuffer<Type, Length>::Peek()
+template<typename Type>
+inline Type CircularBuffer<Type>::Peek()
 {
 	if(_writeIndex > 0)
-		return _elements[_writeIndex - 1 % Length];
-	return NULL;
+		return _elements[_writeIndex - 1 % SIZE];
+	return default_type();
 }
 
-template<typename Type, unsigned int Length>
-inline const int CircularBuffer<Type, Length>::GetCount()
+template<typename Type>
+inline const int CircularBuffer<Type>::GetCount()
 {
 	if (_writeIndex > _readIndex)
 		return _writeIndex - _readIndex;
 
-	return Length - _readIndex + _writeIndex;
+	return SIZE - _readIndex + _writeIndex;
 }
 
-template <typename Type, unsigned int Length>
-inline const bool CircularBuffer<Type, Length>::IsEmpty()
+template <typename Type>
+inline const bool CircularBuffer<Type>::IsEmpty()
 {
 	return _writeIndex == _readIndex && !_is_full;
 }

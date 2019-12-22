@@ -10,8 +10,8 @@ private:
     const int MAX_SIZE;
 
 public:
-    Stack();
-    Stack(size_t);
+    explicit Stack();
+    explicit Stack(size_t);
     ~Stack();
 
     inline const int GetCount();
@@ -22,13 +22,16 @@ public:
 };
 
 template<typename Type>
-inline Stack<Type>::Stack() : Stack(MEMORY_PAGE_SIZE / sizeof(Type))
+inline Stack<Type>::Stack() 
+    : Stack(MEMORY_PAGE_SIZE / sizeof(Type))
 {
 }
 
 template<typename Type>
 inline Stack<Type>::Stack(size_t size) : MAX_SIZE(size)
 {
+    assert(size >= 0);
+
     _elements = new Type[MAX_SIZE];
     _current_index = 0;
 }

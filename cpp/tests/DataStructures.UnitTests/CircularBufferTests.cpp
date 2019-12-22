@@ -12,7 +12,7 @@ namespace CircularBufferTests
 
 	TEST(CircularBufferIsEmpty, IsEmptyTest)
 	{
-		auto* ring = new CircularBuffer<int32_t, 3>();
+		auto* ring = new CircularBuffer<int32_t>(3);
 		ring->Add(1);
 		ring->Add(2);
 
@@ -22,7 +22,7 @@ namespace CircularBufferTests
 	TEST(CircularBufferIsEmpty, 
 		IsEmptyTestWhenInternalReadWritePointersOverlap)
 	{
-		auto* ring = new CircularBuffer<int32_t, 2>();
+		auto* ring = new CircularBuffer<int32_t>(2);
 		ring->Add(1);
 		ring->Add(2);
 
@@ -32,7 +32,7 @@ namespace CircularBufferTests
 	TEST(CircularBufferIsEmpty, 
 		IsEmptyTestWhenReadingInternalIsFullStateShouldBeUpdatedAsWell)
 	{
-		auto* ring = new CircularBuffer<int32_t, 2>();
+		auto* ring = new CircularBuffer<int32_t>(2);
 		ring->Add(1);
 		ring->Add(2);
 
@@ -45,7 +45,7 @@ namespace CircularBufferTests
 	TEST(CircularBufferIsEmpty, 
 		IsEmptyTestShouldNotBeAffectedByPeeking)
 	{
-		auto* ring = new CircularBuffer<int32_t, 1>();
+		auto* ring = new CircularBuffer<int32_t>(1);
 		ring->Add(1);
 
 		ring->Peek();
@@ -56,7 +56,7 @@ namespace CircularBufferTests
 	TEST(CircularBufferGetCount, 
 		GetCountTestWhenWritePointerIsBiggerThanReadPointer)
 	{
-		auto* ring = new CircularBuffer<int32_t, 1>();
+		auto* ring = new CircularBuffer<int32_t>(1);
 		ring->Add(1);
 
 		ASSERT_EQ(1, ring->GetCount());
@@ -65,7 +65,7 @@ namespace CircularBufferTests
 	TEST(CircularBufferGetCount, 
 		GetCountTestWhenReadPointerIsBiggerTHanWritePointer)
 	{
-		auto* ring = new CircularBuffer<int32_t, 3>();
+		auto* ring = new CircularBuffer<int32_t>(3);
 		ring->Add(1);
 		ring->Add(2);
 		ring->Add(3);
