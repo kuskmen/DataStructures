@@ -20,12 +20,6 @@ namespace HeapTests
         //       / \
         //      18  8
 
-        // std::is_heap TODO
-
-        ASSERT_EQ(1, heap->Remove());
-        ASSERT_EQ(3, heap->Remove());
-        ASSERT_EQ(8, heap->Remove());
-        ASSERT_EQ(14, heap->Remove());
-        ASSERT_EQ(18, heap->Remove());
+        ASSERT_TRUE(std::is_heap(heap->begin(), heap->end(), std::greater<>()));
     }
 }

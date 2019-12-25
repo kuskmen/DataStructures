@@ -7,7 +7,7 @@ class Heap
 {
 private:
 	Type* _elements;
-	unsigned int _size;
+	const unsigned int _size;
 	unsigned int _first_free_index;
 
 	inline unsigned int parent(unsigned int);
@@ -21,6 +21,9 @@ public:
 	explicit Heap();
 	explicit Heap(size_t);
 	~Heap();
+
+	inline Type* begin() const { return _elements; }
+	inline Type* end() const { return _elements + _size; }
 
 	void Add(const Type);
 	Type Remove();
