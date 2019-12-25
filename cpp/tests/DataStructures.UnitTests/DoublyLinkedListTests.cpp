@@ -56,7 +56,7 @@ namespace DoublyLinkedListTests
 		list->AddFront(2);
 		list->AddFront(3);
 
-		ASSERT_EQ(3, list->PeekFront()->data);
+		ASSERT_EQ(3, list->PeekFront());
 	}
 
 	TEST(DoublyLinkedListAddBack,
@@ -67,7 +67,7 @@ namespace DoublyLinkedListTests
 		list->AddBack(2);
 		list->AddBack(1);
 
-		ASSERT_EQ(1, list->PeekBack()->data);
+		ASSERT_EQ(1, list->PeekBack());
 	}
 
 	TEST(DoublyLinkedListPeekBack, 
@@ -79,7 +79,7 @@ namespace DoublyLinkedListTests
 		list->AddBack(1246);
 		list->AddBack(expected);
 
-		ASSERT_EQ(expected, list->PeekBack()->data);
+		ASSERT_EQ(expected, list->PeekBack());
 	}
 
 	TEST(DoublyLinkedListPeekFront,
@@ -91,7 +91,7 @@ namespace DoublyLinkedListTests
 		list->AddBack(124);
 		list->AddBack(125);
 
-		ASSERT_EQ(expected, list->PeekFront()->data);
+		ASSERT_EQ(expected, list->PeekFront());
 	}
 
 	TEST(DoublyLinkedListPeekFrontAndBack,
@@ -100,7 +100,7 @@ namespace DoublyLinkedListTests
 		auto* list = new DoublyLinkedList<int32_t>();
 		list->AddBack(1);
 
-		ASSERT_EQ(list->PeekBack()->data, list->PeekFront()->data);
+		ASSERT_EQ(list->PeekBack(), list->PeekFront());
 	}
 
 	TEST(DoublyLinkedListRemoveElement,
@@ -136,8 +136,8 @@ namespace DoublyLinkedListTests
 		// 3 -> 2 -> 1
 		list->Reverse();
 
-		ASSERT_EQ(3, list->RemoveFront()->data);
-		ASSERT_EQ(2, list->RemoveFront()->data);
-		ASSERT_EQ(1, list->RemoveFront()->data);
+		ASSERT_EQ(3, list->RemoveFront());
+		ASSERT_EQ(2, list->RemoveFront());
+		ASSERT_EQ(1, list->RemoveFront());
 	}
 }

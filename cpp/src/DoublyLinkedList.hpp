@@ -1,12 +1,19 @@
 #pragma once
 
+#include "utilities.h"
+
 template <typename Type>
-struct DoublyLinkedListNode
+class DoublyLinkedList;
+
+template <typename Type>
+class DoublyLinkedListNode
 {
-public:
+private:
 	Type data;
 	DoublyLinkedListNode<Type>* next;
 	DoublyLinkedListNode<Type>* previous;
+
+    friend class DoublyLinkedList<Type>;
 };
 
 template <typename Type>
@@ -25,11 +32,11 @@ public:
     void AddFront(const Type);
     
     bool RemoveElement(Type);
-    DoublyLinkedListNode<Type>* RemoveFront();
-    DoublyLinkedListNode<Type>* RemoveBack();
+    Type RemoveFront();
+    Type RemoveBack();
     
-    inline const DoublyLinkedListNode<Type>* PeekBack() const;
-    inline const DoublyLinkedListNode<Type>* PeekFront() const;
+    inline const Type PeekBack() const;
+    inline const Type PeekFront() const;
 	
     inline const bool IsEmpty() const;
     void Reverse();
@@ -92,15 +99,15 @@ void DoublyLinkedList<Type>::AddFront(const Type element)
 }
 
 template<typename Type>
-inline const DoublyLinkedListNode<Type>* DoublyLinkedList<Type>::PeekBack() const
+inline const Type DoublyLinkedList<Type>::PeekBack() const
 {
-    return _tail;
+    return _tail->data;
 }
 
 template<typename Type>
-inline const DoublyLinkedListNode<Type>* DoublyLinkedList<Type>::PeekFront() const
+inline const Type DoublyLinkedList<Type>::PeekFront() const
 {
-    return _head;
+    return _head->data;
 }
 
 template<typename Type>
@@ -126,10 +133,10 @@ bool DoublyLinkedList<Type>::RemoveElement(Type element)
 }
 
 template<typename Type>
-DoublyLinkedListNode<Type>* DoublyLinkedList<Type>::RemoveBack()
+Type DoublyLinkedList<Type>::RemoveBack()
 {
     if (_tail == nullptr)
-        return nullptr;
+        return default_type();
     else
     {
         if (_tail == _head)
@@ -137,20 +144,20 @@ DoublyLinkedListNode<Type>* DoublyLinkedList<Type>::RemoveBack()
 
         auto* result = _tail;
         _tail = _tail->previous;
-        return result;
+        return result->data;
     }
 }
 
 template<typename Type>
-DoublyLinkedListNode<Type>* DoublyLinkedList<Type>::RemoveFront()
+Type DoublyLinkedList<Type>::RemoveFront()
 {
     if (_head == nullptr)
-        return nullptr;
+        return default_type();
     else
     {
         auto* result = _head;
         _head = _head->next;
-        return result;
+        return result->data;
     }
 }
 

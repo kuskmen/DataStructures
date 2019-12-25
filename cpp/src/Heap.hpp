@@ -24,6 +24,7 @@ public:
 
 	inline Type* begin() const { return _elements; }
 	inline Type* end() const { return _elements + _size; }
+	inline unsigned int size() const { return _size;  }
 
 	void Add(const Type);
 	Type Remove();
