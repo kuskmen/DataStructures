@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "..\..\src\CircularBuffer.hpp"
+#include "../src/CircularBuffer.hpp"
 
 namespace CircularBufferTests
 {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "utilities.h"
+#include "utilities.hpp"
 
 template <typename Type>
 class CircularBuffer

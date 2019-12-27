@@ -68,7 +68,10 @@ void Heap<Type>::upheap(Type element)
 				_elements[current_index] = greater;
 			}
 			else
+			{
 				_elements[current_index] = element;
+				break;
+			}
 
 			// maintain the heap property
 			assert(_elements[index] < _elements[current_index]);

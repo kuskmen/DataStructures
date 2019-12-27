@@ -1,10 +1,17 @@
 #include "pch.h"
-#include "../../src/Heap.hpp"
+#include "../src/Heap.hpp"
 
 namespace HeapTests
 {
-    TEST(HeapPropertyTest, 
-        HeapPropertyWhenAddingAndRemovingShouldBeMaintaiedThroughWholeFlow) 
+    class HeapTests : public ::testing::Test
+    {
+    protected:
+        Heap<int32_t>* sut_;
+
+    };
+
+    TEST_F(HeapTests,
+        HeapPropertyWhenAddingShouldBeMaintaiedThroughWholeFlow) 
     {
         auto* heap = new Heap<int32_t>(5);
 

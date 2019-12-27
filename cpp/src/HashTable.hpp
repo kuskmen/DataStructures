@@ -23,8 +23,11 @@ template<typename Type>
 int HashTable<Type>::Prehash(Type) const
 {
 	static_assert(sizeof(Type) == 0, "Only specializations of Prehash can be used.");
+
+	return 0;
 }
 
+template<>
 int HashTable<std::string>::Prehash(std::string element) const
 {
 	std::hash<std::string> _hash{};

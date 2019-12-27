@@ -21,9 +21,13 @@
 bld/
 [Bb]in/
 [Oo]bj/
+*.exe
 
 # Visual Studio cache/options directory
 .vs/
+
+# Visual Studio Code directory
+.vscode/
 
 # cpp packages folder
 [Pp]ackages/

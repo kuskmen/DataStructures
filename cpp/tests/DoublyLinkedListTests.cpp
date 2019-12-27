@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "../../src/DoublyLinkedList.hpp"
+#include "../src/DoublyLinkedList.hpp"
 
 namespace DoublyLinkedListTests
 {
