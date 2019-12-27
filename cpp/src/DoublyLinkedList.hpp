@@ -1,6 +1,6 @@
 #pragma once
 
-#include "utilities.h"
+#include "utilities.hpp"
 
 template <typename Type>
 class DoublyLinkedList;
@@ -8,10 +8,10 @@ class DoublyLinkedList;
 template <typename Type>
 class DoublyLinkedListNode
 {
-private:
-	Type data;
-	DoublyLinkedListNode<Type>* next;
-	DoublyLinkedListNode<Type>* previous;
+ private:
+    Type data;
+    DoublyLinkedListNode<Type>* next;
+    DoublyLinkedListNode<Type>* previous;
 
     friend class DoublyLinkedList<Type>;
 };
@@ -19,25 +19,25 @@ private:
 template <typename Type>
 class DoublyLinkedList
 {
-private:
-	DoublyLinkedListNode<Type>* _head;
+ private:
+    DoublyLinkedListNode<Type>* _head;
     DoublyLinkedListNode<Type>* _tail;
     void removeNode(DoublyLinkedListNode<Type>*);
 
-public:
-	explicit DoublyLinkedList();
+ public:
+    DoublyLinkedList();
     ~DoublyLinkedList();
 
     void AddBack(const Type);
     void AddFront(const Type);
-    
+
     bool RemoveElement(Type);
     Type RemoveFront();
     Type RemoveBack();
-    
+
     inline const Type PeekBack() const;
     inline const Type PeekFront() const;
-	
+
     inline const bool IsEmpty() const;
     void Reverse();
 };
@@ -45,7 +45,7 @@ public:
 template<typename Type>
 inline DoublyLinkedList<Type>::DoublyLinkedList()
 {
-	_head = nullptr;
+    _head = nullptr;
     _tail = _head;
 }
 
@@ -72,7 +72,7 @@ void DoublyLinkedList<Type>::AddBack(const Type element)
         _head = _tail;
         return;
     }
-    
+
     old_tail->next = _tail;
     _tail->previous = old_tail;
 }
@@ -113,7 +113,7 @@ inline const Type DoublyLinkedList<Type>::PeekFront() const
 template<typename Type>
 inline const bool DoublyLinkedList<Type>::IsEmpty() const
 {
-	return _head == nullptr;
+    return _head == nullptr;
 }
 
 template<typename Type>

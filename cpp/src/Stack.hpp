@@ -1,16 +1,16 @@
 #pragma once
-#include "utilities.h"
+#include "utilities.hpp"
 
 template <typename Type>
 class Stack
 {
-private:
+ private:
     Type* _elements;
     int _current_index;
     const int MAX_SIZE;
 
-public:
-    explicit Stack();
+ public:
+    Stack();
     explicit Stack(size_t);
     ~Stack();
 
@@ -22,7 +22,7 @@ public:
 };
 
 template<typename Type>
-inline Stack<Type>::Stack() 
+inline Stack<Type>::Stack()
     : Stack(MEMORY_PAGE_SIZE / sizeof(Type))
 {
 }
